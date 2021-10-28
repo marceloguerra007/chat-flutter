@@ -2,7 +2,9 @@ import 'package:chat/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({ Key? key }) : super(key: key);
+  final void Function(AuthFormData) onSubmmit;
+  
+  const AuthForm({ Key? key, required this.onSubmmit }) : super(key: key);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -18,6 +20,7 @@ class _AuthFormState extends State<AuthForm> {
     if (!isValid)
       return;
 
+    widget.onSubmmit(_formData);
   }
   
   @override
@@ -27,6 +30,7 @@ class _AuthFormState extends State<AuthForm> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               if ( _formData.isSignup)
