@@ -10,7 +10,7 @@ class AuthMockService implements AuthService{
   static MultiStreamController<ChatUser?>? _controller;
   
   static final _defaultUser = ChatUser(
-    id: '1', 
+    id: '7', 
     name: 'default', 
     email: "teste@teste.com.br", 
     imageURL: 'assets/images/avatar.png'

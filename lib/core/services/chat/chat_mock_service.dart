@@ -9,15 +9,25 @@ class ChatMockService implements ChatService{
   static final List<ChatMessage> _msgs = [
     ChatMessage(
       id: '1', 
-      text: 'Olá, bem vindo', 
+      text: 'Olá, bem vindo ao nosso chat.', 
       createdAt: DateTime.now(), 
       userId: '11', 
       userName: 'Klara', 
-      userImageURL: 'assets/images/avatar.png')
+      userImageURL: 'assets/images/avatar.png'),
+    ChatMessage(
+      id: '2', 
+      text: 'Oi, tudo bem', 
+      createdAt: DateTime.now(), 
+      userId: '7', 
+      userName: 'JP', 
+      userImageURL: 'assets/images/avatar.png')      
   ];
   static MultiStreamController<List<ChatMessage>>? _controller;
   static final _msgsStream = Stream<List<ChatMessage>>.multi((controller) {
     _controller = controller;
+
+    //temp
+    _controller?.add(_msgs);
   });
   
   @override
