@@ -19,20 +19,21 @@ class ChatFirebaseService implements ChatService{
     .orderBy('createdAt', descending: true)
     .snapshots();
     
+    /*
     return Stream<List<ChatMessage>>.multi((controller) {
       snapshots.listen((snapshot) { 
         List<ChatMessage> list = snapshot.docs.map((doc) => doc.data()).toList();
         controller.add(list);
       });
     });
+    */
 
-    /* //Retorno simplicado que é igual o retorno acima mas de forma implicita.
-      return snapshots.map((snapshot){
-        return snapshot.docs.map((doc){
-          return doc.data();
-        }).toList();
-      });
-     */
+    //Retorno simplicado que é igual o retorno acima mas de forma implicita.
+    return snapshots.map((snapshot){
+      return snapshot.docs.map((doc){
+        return doc.data();
+      }).toList();
+    });     
   }
 
   @override
@@ -75,7 +76,7 @@ class ChatFirebaseService implements ChatService{
   Map<String, dynamic> _toFirestore(ChatMessage msg, SetOptions? options){
     return {
       'text': msg.text, 
-      'createdAt': msg.createdAt, 
+      'createdAt': msg.createdAt.toIso8601String(),
       'userId': msg.userId, 
       'userName': msg.userName,
       'userImageURL': msg.userImageURL   
